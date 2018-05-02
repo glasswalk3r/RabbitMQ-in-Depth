@@ -1,8 +1,8 @@
 #!/bin/bash
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv F7B8CEA6056E8E56 && \
-echo "deb http://www.rabbitmq.com/debian/ testing main" > /etc/apt/sources.list.d/rabbitmq.list && \
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D208507CA14F4FCA && \
-echo "deb http://packages.erlang-solutions.com/debian precise contrib" > /etc/apt/sources.list.d/erlang-solutions.list
+
+echo "deb https://dl.bintray.com/rabbitmq/debian trusty main" | tee /etc/apt/sources.list.d/bintray.rabbitmq.list
+wget -O- https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc | apt-key add -
+
 apt-get update -qq
 apt-get remove -y -qq chef puppet
 apt-get autoremove -y -qq
