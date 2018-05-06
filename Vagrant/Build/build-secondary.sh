@@ -1,11 +1,4 @@
 #!/bin/bash
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv F7B8CEA6056E8E56 && \
-echo "deb http://www.rabbitmq.com/debian/ testing main" > /etc/apt/sources.list.d/rabbitmq.list && \
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D208507CA14F4FCA && \
-echo "deb http://packages.erlang-solutions.com/debian precise contrib" > /etc/apt/sources.list.d/erlang-solutions.list
-apt-get update -qq
-apt-get remove -y -qq chef puppet
-apt-get autoremove -y -qq
 
 # Add the vagrant node primary addresses
 echo "
@@ -24,7 +17,7 @@ apt-get install -y -qq rabbitmq-server
 apt-get -qq -y remove curl unzip
 apt-get autoremove -y
 apt-get clean
-rm -rf /var/lib/{apt,dpkg,cache,log}/
+#rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # Stop the already running RabbitMQ server
 service rabbitmq-server stop

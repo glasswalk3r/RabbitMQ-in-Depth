@@ -8,8 +8,10 @@ wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
 dpkg -i erlang-solutions_1.0_all.deb
 rm -v erlang-solutions_1.0_all.deb
 apt-get update
-apt-get remove -y -qq chef puppet
-apt-get autoremove -y -qq
+apt-get remove -y chef puppet
+apt-get autoremove -y
 apt-get -y upgrade
 apt-get -y install esl-erlang
-apt-get -y install rabbitmq-server
+apt-get -y install rabbitmq-server console-common
+apt-get autoremove -y
+apt-get clean

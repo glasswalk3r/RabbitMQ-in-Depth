@@ -1,8 +1,12 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# To setup the keyboard on the VM
+# see install-keymap from console-common package for details
+keyboard = 'br'
+
 Vagrant.configure('2') do |config|
-  config.vm.box = 'ubuntu/trusty64'
+  config.vm.box = 'arfreitas/rabbitmq'
 
   config.vm.define 'primary', primary: true do |primary|
     primary.vm.hostname = 'primary'
@@ -19,7 +23,9 @@ Vagrant.configure('2') do |config|
     primary.vm.network :forwarded_port, guest: 61613, host: 61613
     primary.vm.network :private_network, ip: '192.168.50.4'
     primary.vm.provision 'shell', path: 'build-primary.sh'
-    primary.vm.provision "file", source: 'erlang', destination: '/etc/apt/preferences.d/erlang'
+    primary.vm.provision 'shell', path: 'build-primary-vagrant.sh', privileged: false
+    primary.vm.provision 'shell', path: 'build-primary-ipython.sh'
+    primary.vm.provision 'shell', inline: 'install-keymap #{keyboard}'
   end
 
   config.vm.define 'secondary', autostart: false do |secondary|
@@ -27,6 +33,7 @@ Vagrant.configure('2') do |config|
     secondary.vm.network :forwarded_port, guest: 5672, host: 5673
     secondary.vm.network :private_network, ip: '192.168.50.5'
     secondary.vm.provision 'shell', path: 'build-secondary.sh'
+    secondary.vm.provision 'shell', inline: 'install-keymap #{keyboard}'
   end
 
 end

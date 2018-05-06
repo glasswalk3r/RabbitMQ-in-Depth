@@ -2,8 +2,10 @@
 # vi: set ft=ruby :
 
 Vagrant.configure('2') do |config|
-  config.vm.box = 'ubuntu/trusty64'
-  config.vm.provision 'shell', 'path': 'setup.sh' 
+  config.vm.box = 'ubuntu/xenial64'
+  config.vm.provision 'shell', 'path': 'setup.sh'
+  # inserting the insecure SSH key to force Vagrant to generate a new one
+  config.vm.provision 'shell', inline: 'curl https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub > /home/vagrant/.ssh/authorized_keys', privileged: false
 
   config.vm.provider "virtualbox" do |vb|
       vb.gui = false
