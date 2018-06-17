@@ -1,6 +1,6 @@
 # Artifacts to generate a base Vagrant image for RabbitMQ
 
-The files include in this directory is to provide an automated way to create base RabbitMQ images to be used for primary and secondary later.
+The files included in this directory is to provide an automated way to create base RabbitMQ images to be used for primary and secondary later.
 
 The Vagrantfile and setup.sh shell script will:
 
